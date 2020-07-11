@@ -1,0 +1,2 @@
+[[ -f $HOME/.zshrc ]] && mv $HOME/.zshrc $HOME/.bak/.zshrc.bak
+echo "source $HOME/dotfiles/zsh/zshrc" > $HOME/.zshrc

@@ -1,0 +1,21 @@
+
+###########################
+# bootstrap dotfiles repo #
+###########################
+if [[ ! -d $HOME/dotfiles/ ]]; then
+  git clone https://github.com/kschaab/dotfiles.git $HOME/dotfiles
+fi
+
+#############################################
+# create directory to backup existing files #
+#############################################
+if [[ ! -d $HOME/.bak/ ]]; then
+  mkdir $HOME/.bak
+fi
+
+
+##########################
+# bootstrap each dotfile #
+##########################
+$HOME/dotfiles/zsh/bootstrap
+

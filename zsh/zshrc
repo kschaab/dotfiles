@@ -1,0 +1,85 @@
+
+
+case `uname` in
+	Darwin)
+    ###################
+		# Darwin commands #
+    ###################
+
+    ####################
+    # Install homebrew #
+    ####################
+    if [[ -d $HOME/homebrew ]]; then
+      export PATH=$HOME/homebrew/bin:$PATH
+      export LD_LIBRARY_PATH=$HOME/homebrew/lib:$LD_LIBRARY_PATH
+    fi
+		if ! command -v brew > /dev/null 2&>1 ;  then
+      cd $HOME
+      git clone https://github.com/mxcl/homebrew.git
+      export PATH=$HOME/homebrew/bin:$PATH
+      export LD_LIBRARY_PATH=$HOME/homebrew/lib:$LD_LIBRARY_PATH
+		fi
+
+    ##############
+    # Nerd fonts #
+    ##############
+		if command -v brew > /dev/null 2&>1 ; then
+			brew tap homebrew/cask-fonts
+			brew cask list font-hack-nerd-font > /dev/null 2&>1 || brew cask install font-hack-nerd-font
+		fi
+	;;
+	Linux)
+	;;
+esac
+
+##################
+# Powerlevel 10k #
+##################
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+###########
+# history #
+###########
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt inc_append_history share_history hist_ignore_space
+
+###########
+# antigen #
+###########
+
+if [[ ! -d  ~/.antigen ]]; then
+	mkdir ~/.antigen
+fi
+
+if [[ ! -f ~/.antigen/antigen.zsh ]]; then
+	curl -L git.io/antigen > ~/.antigen/antigen.zsh
+fi
+
+source ~/.antigen/antigen.zsh
+
+antigen use oh-my-zsh
+antigen bundle pip
+antigen bundle command-not-found
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen theme romkatv/powerlevel10k
+
+antigen apply
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
+  mkdir -p ~/.vim/bundle
+  cd ~/.vim/bundle
+  git clone https://github.com/VundleVim/Vundle.vim.git
+fi
+
