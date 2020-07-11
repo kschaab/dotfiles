@@ -20,5 +20,5 @@ fi
 ##########################
 # bootstrap each dotfile #
 ##########################
-$HOME/dotfiles/zsh/bootstrap
+$HOME/dotfiles/zsh/setup/bootstrap
 
