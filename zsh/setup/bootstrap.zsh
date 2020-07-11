@@ -8,7 +8,7 @@ case `uname` in
         ################
         # setup on mac #
         ################
-        ./mac.zsh
+        $(dirname "${(%):-%N}")/mac.zsh
     ;;
     Linux)
     ;;
