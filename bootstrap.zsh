@@ -26,6 +26,6 @@ fi
 ##########################
 # bootstrap each dotfile #
 ##########################
-$(dirname "${(%):-%N}")/zsh/setup/bootstrap.zsh
-$(dirname "${(%):-%N}")/vim/setup/bootstrap.zsh
+$HOME/dotfiles/zsh/setup/bootstrap.zsh
+$HOME/dotfiles/vim/setup/bootstrap.zsh
 
