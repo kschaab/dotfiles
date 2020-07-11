@@ -1,0 +1,101 @@
+#!/bin/zsh
+
+local SOURCE_DIRS=(
+  ~/source
+)
+
+local PREFERENCES=(
+  ~/source/dev
+)
+
+typeset -gxA SOURCE_DIRS_MAP
+SOURCE_DIRS_MAP[dev]=~/source/dev
+SOURCE_DIRS_MAP[clean]=~/source/clean
+SOURCE_DIRS_MAP[scratch]=~/source/scratch
+SOURCE_DIRS_MAP[source]=~/source
+SOURCE_DIRS_MAP[temp]=~/source/temp
+
+function _g_process_dir()
+{
+  for dir in $1/**/.git/; do
+    local SOURCE_DIRECTORY=$(dirname $dir)
+    local CURRENT_DIRECTORY=$SOURCE_DIRECTORY
+    local ALIAS=$(basename $SOURCE_DIRECTORY)
+    while [[ ! -z "$SOURCE_DIRS_MAP[$ALIAS]" ]]; do
+      if [[ "$SOURCE_DIRS_MAP[$ALIAS]" == "$SOURCE_DIRECTORY" ]]; then
+        break
+      fi
+      CURRENT_DIRECTORY=$(dirname $CURRENT_DIRECTORY)
+      ALIAS=$(basename $CURRENT_DIRECTORY)/$ALIAS
+    done
+    if [[ "$SOURCE_DIRS_MAP[$ALIAS]" == "$SOURCE_DIRECTORY" ]]; then
+      continue
+    fi
+    if [[ -z "$SOURCE_DIRS_MAP[$ALIAS]" ]]; then
+      SOURCE_DIRS_MAP[$ALIAS]=$SOURCE_DIRECTORY
+    fi
+  done
+}
+
+function _g_dir()
+{
+  local DUMP_USAGE=
+  if [[ "$1" == "" ]]; then
+    >&2 echo "Must specify an alias, can be one of the following:"
+    _g_dump_map "    "
+    return 1
+  fi
+
+  if [[ "$1" == "list" ]]; then
+    _g_dump_map ""
+    return 0
+  fi
+
+  local change_to=$SOURCE_DIRS_MAP[$1]
+  if [[ -z $change_to ]]; then
+    >&2 echo "$1 is not a valid alias.  Valid values are as follows:"
+    _g_dump_map "    "
+    return 1
+  fi
+
+  cd $change_to
+}
+
+alias g=_g_dir
+
+function _g_dump_map()
+{
+  local LENGTH=$(( 0 ))
+  for key value in ${(kv)SOURCE_DIRS_MAP}; do
+    if [[ ${#key} -gt $LENGTH ]]; then
+      LENGTH=${#key}
+    fi
+  done
+  for key value in ${(kv)SOURCE_DIRS_MAP}; do
+    local pad=$(( $LENGTH - ${#key} + 2 ))
+    local padding=""
+    for i in {1..$pad}; do
+      padding="$padding "
+    done
+    echo "$1$key $padding-> $value"
+  done
+}
+
+function _g_completion()
+{
+  local candidates=('list:List shortcuts')
+  for key value in ${(kv)SOURCE_DIRS_MAP}; do
+    candidates+=("$key: $value")
+  done
+  _describe 'g' candidates
+}
+
+for p in $PREFERENCES; do
+  _g_process_dir $p
+done
+
+for s in $SOURCE_DIRS; do
+  _g_process_dir $s
+done
+
+compdef _g_completion _g_dir
