@@ -4,7 +4,7 @@
 # Install homebrew if needed #
 ##############################
 if ! command -v $HOME/homebrew/bin/brew > /dev/null 2>&1 ;  then
-    git clone https://github.com/mxcl/homebrew.git $HOME/homebrew
+    git clone https://github.com/Homebrew/brew.git $HOME/homebrew
 fi
 
 export PATH=$HOME/homebrew/bin:$PATH
