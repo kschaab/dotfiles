@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-if ! command -v git ; then
+if ! command -v git > /dev/null 2>&1 ; then
   echo "Bootstrap requires git, install and then continue."
+  exit 1
 fi
 
 ###########################
@@ -25,5 +26,6 @@ fi
 ##########################
 # bootstrap each dotfile #
 ##########################
-$HOME/dotfiles/zsh/setup/bootstrap.zsh
+$(dirname "${(%):-%N}")/zsh/setup/bootstrap.zsh
+$(dirname "${(%):-%N}")/vim/setup/bootstrap.zsh
 

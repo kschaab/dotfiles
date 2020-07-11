@@ -15,5 +15,5 @@ export LD_LIBRARY_PATH=$HOME/homebrew/lib:$LD_LIBRARY_PATH
 ##############
 if (( $+commands[brew] )); then
     (brew tap | grep -Eq ^homebrew/cask-fonts$) || brew tap homebrew/cask-fonts
-    brew cask list font-hack-nerd-font > /dev/null 2&>1 || brew cask install font-hack-nerd-font
+    brew cask list font-hack-nerd-font > /dev/null 2>&1 || brew cask install font-hack-nerd-font
 fi

@@ -36,27 +36,20 @@ set maxmempattern=3000
 """"""""""""
 "  Vundle  "
 """"""""""""
-set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/tabnine-vim
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'fatih/vim-go'
-Plugin 'zxqfl/tabnine-vim'
 Plugin 'HerringtonDarkholme/yats.vim'
-"Plugin 'zefei/vim-wintabs'
-"Plugin 'zefei/vim-wintabs-powerline'
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'justinmk/vim-sneak'
 Plugin 'dhruvasagar/vim-markify'
 Plugin 'mhinz/vim-signify'
-"Plugin 'dag/vim-fish'
 Plugin 'majutsushi/tagbar'
 Plugin 'wesQ3/vim-windowswap'
 Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()
@@ -140,80 +133,6 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 """"""""""""
 "  tagbar  "
 """"""""""""
-
-""""""""""""""""""""
-" Internal plugins "
-""""""""""""""""""""
-
-let _google_vim = '/usr/share/vim/google/google.vim'
-
-if filereadable(expand(_google_vim))
-
-  " Use the 'google' package by default (see http://go/vim/packages).
-  exe 'source' _google_vim
-  Glug glug sources+='/usr/local/google/home/keithsc/.vim/Plugin'
-
-  """"""""""""""""""""""""""""""""""""""""""""""""""
-  " codefmt (http://go/vim/plugins/codefmt-google) "
-  " \=b format full buffer                         "
-  """"""""""""""""""""""""""""""""""""""""""""""""""
-  Glug codefmt plugin[mappings] gofmt_executable="goimports"
-  Glug codefmt-google
-
-  augroup autoformat_settings
-  "  autocmd FileType borg,gcl,patchpanel AutoFormatBuffer gclfmt
-    autocmd FileType bzl AutoFormatBuffer buildifier
-    autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
-    autocmd FileType dart AutoFormatBuffer dartfmt
-    autocmd FileType go AutoFormatBuffer gofmt
-    autocmd FileType java AutoFormatBuffer google-java-format
-    autocmd FileType jslayout AutoFormatBuffer jslfmt
-    autocmd FileType markdown AutoFormatBuffer mdformat
-    autocmd FileType ncl AutoFormatBuffer nclfmt
-    autocmd FileType python AutoFormatBuffer pyformat
-    autocmd FileType textpb AutoFormatBuffer text-proto-format
-    autocmd FileType html,css,json AutoFormatBuffer js-beautify
-  augroup END
-
-  " Load YCM (http://go/ycm) for semantic auto-completion and quick syntax
-  " error checking. Pulls in a google3-enabled version of YCM itself and
-  " a google3-specific default configuration.
-  "Glug youcompleteme-google
-
-  " Load the automated blaze dependency integration for Go.
-  Glug blazedeps auto_filetypes=`['go']`
-
-  " Load piper integration (http://go/VimPerforce).
-  " Glug piper plugin[mappings]
-
-  " Load Critique integration. Use :h critique for more details.
-  Glug critique plugin[mappings]
-
-  " Load blaze integration (http://go/blazevim).
-  Glug blaze plugin[mappings]
-
-  Glug relatedfiles
-
-  Glug corpweb plugin[mappings]
-
-  Glug outline-window
-
-  " Glug glint-ale
-
-  Glug whitespace !highlight
-  Glaive blaze !alerts
-  let g:blazevim_quickfix_autoopen = 1
-
-  let g:ale_linters = {
-        \ 'python': ['gpylint'],
-        \ 'go': ['glint'],
-  \}
-
-  " By default, ale attempts to traverse up the file directory to find a
-  " virtualenv installation. This can cause high latency (~15s) in citc clients
-  " when opening Python files. Setting the following flag to `1` disables that.
-  let g:ale_python_gpylint_use_global = 1
-end
 
 " Always show statusline
 set laststatus=2
