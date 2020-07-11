@@ -4,6 +4,9 @@
 ###########################
 if [[ ! -d $HOME/dotfiles/ ]]; then
   git clone https://github.com/kschaab/dotfiles.git $HOME/dotfiles
+  pushd $HOME/dotfiles
+  git remote set-url --push origin git@github.com:kschaab/dotfiles.git
+  popd
 fi
 
 #############################################
