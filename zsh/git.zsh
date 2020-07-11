@@ -1,13 +1,33 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
+####################
+# git prune merged #
+####################
+function _git_prune_merged()
+{
+  git fetch --all
+  git remote | xargs git remote prune
+  git branch -vv | grep -E '(origin|upstream)/.*: gone]' | awk '{print $1}' | xargs git branch -D
+}
+
+alias git-prune-merged='_git_prune_merged'
+
+################
+# g completion #
+################
+
+# Source directories to search through
 local SOURCE_DIRS=(
   ~/source
 )
 
+# Preferred source directories, if there are collisions these will be used over any others. The order of this array
+# dictates the order of the preferred directories.
 local PREFERENCES=(
   ~/source/dev
 )
 
+# Constant entry
 typeset -gxA SOURCE_DIRS_MAP
 SOURCE_DIRS_MAP[dev]=~/source/dev
 SOURCE_DIRS_MAP[clean]=~/source/clean
@@ -15,6 +35,7 @@ SOURCE_DIRS_MAP[scratch]=~/source/scratch
 SOURCE_DIRS_MAP[source]=~/source
 SOURCE_DIRS_MAP[temp]=~/source/temp
 
+# Finds git repositories in the specified dir
 function _g_process_dir()
 {
   for dir in $1/**/.git/; do
@@ -37,6 +58,7 @@ function _g_process_dir()
   done
 }
 
+# Navigates to an alias
 function _g_dir()
 {
   local DUMP_USAGE=
@@ -51,6 +73,11 @@ function _g_dir()
     return 0
   fi
 
+  if [[ "$1" == "." ]]; then
+    cd $(git rev-parse --show-toplevel)
+    return 0
+  fi
+
   local change_to=$SOURCE_DIRS_MAP[$1]
   if [[ -z $change_to ]]; then
     >&2 echo "$1 is not a valid alias.  Valid values are as follows:"
@@ -62,7 +89,9 @@ function _g_dir()
 }
 
 alias g=_g_dir
+alias g.="_g_dir ."
 
+# Dumps the aliases and the directories to which they refer
 function _g_dump_map()
 {
   local LENGTH=$(( 0 ))
@@ -81,6 +110,7 @@ function _g_dump_map()
   done
 }
 
+# Completion function
 function _g_completion()
 {
   local candidates=('list:List shortcuts')

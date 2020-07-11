@@ -1,11 +1,11 @@
 
-case `uname` in
-	Darwin)
+if [[ `uname` == 'Darwin' ]]; then
     source $(dirname "${(%):-%N}")/mac.zsh
-	;;
-	Linux)
-	;;
-esac
+fi
+
+if [[ `uname` == 'Linux' ]]; then
+    source $(dirname "${(%):-%N}")/linux.zsh
+fi
 
 ##################
 # Powerlevel 10k #
@@ -25,7 +25,13 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt inc_append_history share_history hist_ignore_space
 
+setopt auto_pushd
+
 source $(dirname "${(%):-%N}")/antigen.zsh
+
+autoload -Uz compinit && compinit
+
+source $(dirname "${(%):-%N}")/git.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

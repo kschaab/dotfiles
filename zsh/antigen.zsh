@@ -1,18 +1,26 @@
 #!/usr/bin/env zsh
+typeset -g ADOTDIR=$HOME/.antigen
+typeset -g ADOT=$ADOTDIR
 
-if [[ ! -d  $HOME/.antigen ]]; then
-    mkdir $HOME/.antigen
+if [[ ! -d  $ADOTDIR ]]; then
+    mkdir $ADOTDIR
 fi
 
-if [[ ! -f $HOME/.antigen/antigen.zsh ]]; then
-    curl -L git.io/antigen > $HOME/.antigen/antigen.zsh
+if [[ ! -f $ADOTDIR/antigen.zsh ]]; then
+    curl -L git.io/antigen > $ADOTDIR/antigen.zsh
 fi
 
-source $HOME/.antigen/antigen.zsh
+typeset -g ANTIGEN_CACHE=false
+
+source $ADOTDIR/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle pip
 antigen bundle command-not-found
+antigen bundle autojump
+antigen bundle npm
+antigen bundle desyncr/auto-ls
+
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 
