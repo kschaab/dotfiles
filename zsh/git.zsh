@@ -38,6 +38,9 @@ SOURCE_DIRS_MAP[temp]=~/source/temp
 # Finds git repositories in the specified dir
 function _g_process_dir()
 {
+  if [[ ! -d $1 ]]; then
+    return
+  fi
   for dir in $1/**/.git/; do
     local SOURCE_DIRECTORY=$(dirname $dir)
     local CURRENT_DIRECTORY=$SOURCE_DIRECTORY
