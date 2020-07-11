@@ -1,0 +1,301 @@
+" Welcome to Vim (http://go/vim).
+
+" Enable modern Vim features not compatible with Vi spec.
+set nocompatible
+
+" Default tabs
+set autoindent smarttab tabstop=2 shiftwidth=2 expandtab
+
+" Extend timeout for my slow brain to catch up
+set timeoutlen=3000
+
+" Automatically change directory to the buffer's directory
+autocmd BufWinEnter * lcd %:p:h
+
+" Use system clipboards
+set clipboard=unnamed,unnamedplus
+
+" Set folding to syntax based
+set foldmethod=syntax
+set foldlevel=99
+
+" Set column indiator
+set colorcolumn=140
+
+" Smart case sensitive search
+set smartcase
+
+" Visual paste keep yank
+vnoremap <unique><silent> p p:let @"=@0<CR>:let @*=@0<CR>:let @+=@0<CR>
+
+" Map leader to space
+let mapleader=" "
+
+set maxmempattern=3000
+
+""""""""""""
+"  Vundle  "
+""""""""""""
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/tabnine-vim
+filetype off
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fatih/vim-go'
+Plugin 'zxqfl/tabnine-vim'
+Plugin 'HerringtonDarkholme/yats.vim'
+"Plugin 'zefei/vim-wintabs'
+"Plugin 'zefei/vim-wintabs-powerline'
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'justinmk/vim-sneak'
+Plugin 'dhruvasagar/vim-markify'
+Plugin 'mhinz/vim-signify'
+"Plugin 'dag/vim-fish'
+Plugin 'majutsushi/tagbar'
+Plugin 'wesQ3/vim-windowswap'
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+call vundle#end()
+filetype on
+
+let g:go_def_mode = 'guru'
+let g:go_info_mode = 'guru'
+
+"""""""""""""
+"  Airline  "
+"""""""""""""
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamecollapse=0
+let g:airline#extensions#tabline#fnametruncate=0
+
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+nmap gT <Plug>AirlineSelectPrevTab
+nmap gt <Plug>AirlineSelectNextTab
+
+""""""""""""""
+"  NerdTree  "
+"""""""""""""""
+" Open NERDTree in the directory of the current file (or /home if no file is open)
+nmap <silent> <leader>o :call NERDTreeToggleInCurDir()<cr>
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  elseif bufname('%')
+    exe ":NERDTreeFind"
+  else
+    exe ":NERDTreeCWD"
+  endif
+endfunction
+let NERDTreeQuitOnOpen=1
+
+" Close if the nerdtree is the only open pane left in tab
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"""""""""""""
+"  Markify  "
+"""""""""""""
+let g:markify_autocmd = 1
+let g:markify_error_text = '>>'
+let g:markify_warning_text = '>>'
+let g:markify_info_text = '>>'
+
+"""""""""""""
+"  Signify  "
+"""""""""""""
+
+let g:signify_vcs_list = ['hg']
+
+"""""""""""""""""
+" youcompleteme "
+"""""""""""""""""
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+""""""""""""""
+" easymotion "
+""""""""""""""
+
+""""""""""""
+"  tagbar  "
+""""""""""""
+
+""""""""""""""""""""
+" Internal plugins "
+""""""""""""""""""""
+
+let _google_vim = '/usr/share/vim/google/google.vim'
+
+if filereadable(expand(_google_vim))
+
+  " Use the 'google' package by default (see http://go/vim/packages).
+  exe 'source' _google_vim
+  Glug glug sources+='/usr/local/google/home/keithsc/.vim/Plugin'
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  " codefmt (http://go/vim/plugins/codefmt-google) "
+  " \=b format full buffer                         "
+  """"""""""""""""""""""""""""""""""""""""""""""""""
+  Glug codefmt plugin[mappings] gofmt_executable="goimports"
+  Glug codefmt-google
+
+  augroup autoformat_settings
+  "  autocmd FileType borg,gcl,patchpanel AutoFormatBuffer gclfmt
+    autocmd FileType bzl AutoFormatBuffer buildifier
+    autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+    autocmd FileType dart AutoFormatBuffer dartfmt
+    autocmd FileType go AutoFormatBuffer gofmt
+    autocmd FileType java AutoFormatBuffer google-java-format
+    autocmd FileType jslayout AutoFormatBuffer jslfmt
+    autocmd FileType markdown AutoFormatBuffer mdformat
+    autocmd FileType ncl AutoFormatBuffer nclfmt
+    autocmd FileType python AutoFormatBuffer pyformat
+    autocmd FileType textpb AutoFormatBuffer text-proto-format
+    autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  augroup END
+
+  " Load YCM (http://go/ycm) for semantic auto-completion and quick syntax
+  " error checking. Pulls in a google3-enabled version of YCM itself and
+  " a google3-specific default configuration.
+  "Glug youcompleteme-google
+
+  " Load the automated blaze dependency integration for Go.
+  Glug blazedeps auto_filetypes=`['go']`
+
+  " Load piper integration (http://go/VimPerforce).
+  " Glug piper plugin[mappings]
+
+  " Load Critique integration. Use :h critique for more details.
+  Glug critique plugin[mappings]
+
+  " Load blaze integration (http://go/blazevim).
+  Glug blaze plugin[mappings]
+
+  Glug relatedfiles
+
+  Glug corpweb plugin[mappings]
+
+  Glug outline-window
+
+  " Glug glint-ale
+
+  Glug whitespace !highlight
+  Glaive blaze !alerts
+  let g:blazevim_quickfix_autoopen = 1
+
+  let g:ale_linters = {
+        \ 'python': ['gpylint'],
+        \ 'go': ['glint'],
+  \}
+
+  " By default, ale attempts to traverse up the file directory to find a
+  " virtualenv installation. This can cause high latency (~15s) in citc clients
+  " when opening Python files. Setting the following flag to `1` disables that.
+  let g:ale_python_gpylint_use_global = 1
+end
+
+" Always show statusline
+set laststatus=2
+
+" " Use 256 colours (Use this setting only if your terminal supports 256
+" colours)
+" set termguicolors
+
+set number
+set signcolumn=yes
+
+" Highlight current line
+set cursorline
+hi CursorLine term=bold cterm=bold
+hi CursorLineNr term=bold ctermfg=Yellow
+
+" Use outline
+" noremap <Leader>o :GoogleOutlineWindow<CR>
+
+set wildchar=<Tab> wildmenu wildmode=full
+set history=1000 undolevels=1000
+
+
+" Map next/prev error
+nnoremap gq :cn<CR>
+nnoremap gQ :cp<CR>
+
+nnoremap <Leader>O :PiperSelectActiveFiles<CR>
+nnoremap <Leader>a :!hg amend && hg uc<cr>
+
+" Remap keys to move in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-l> <C-o>l
+inoremap <C-x> <C-o>x
+inoremap <C-a> <C-o>A
+inoremap <C-i> <C-o>I
+inoremap <C-w> <C-o>w
+inoremap <C-W> <C-o>W
+inoremap <C-e> <C-o>e
+inoremap <C-E> <C-o>E
+inoremap <C-b> <C-o>b
+inoremap <C-B> <C-o>B
+
+nnoremap <C-h> <C-w><h>
+nnoremap <C-j> <C-w><j>
+nnoremap <C-k> <C-w><l>
+nnoremap <C-l> <C-w><l>
+
+nnoremap <Bslash> $
+
+" Flow splits
+set splitbelow
+set splitright
+
+" Incremental search
+set incsearch
+
+" Load all plugins before this line
+filetype plugin indent on
+
+" Turn on autosave
+"let g:auto_save = 1
+
+syntax on
+
+set list listchars=tab:»\ ,trail:°
+
+set background=dark
+colorscheme codedark
+
+highlight link WintabsActive Visual
+
+" Don't extend comment lines
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Fix tmux window on exit
+autocmd VimLeave * set notitle
+set autowrite
+
+" Automatically redistribute windows on resize
+autocmd VimResized * wincmd =
+
+:hi SpecialKey ctermfg=darkgray
