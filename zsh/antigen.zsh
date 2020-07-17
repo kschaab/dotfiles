@@ -20,6 +20,7 @@ antigen bundle command-not-found
 antigen bundle autojump
 antigen bundle npm
 antigen bundle desyncr/auto-ls
+antigen bundle marlonrichert/zsh-autocomplete
 
 
 antigen bundle zsh-users/zsh-syntax-highlighting
