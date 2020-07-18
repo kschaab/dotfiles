@@ -22,10 +22,10 @@ if [[ ! -d $HOME/.bak/ ]]; then
   mkdir $HOME/.bak
 fi
 
-
 ##########################
 # bootstrap each dotfile #
 ##########################
 $HOME/dotfiles/zsh/setup/bootstrap.zsh
 $HOME/dotfiles/vim/setup/bootstrap.zsh
+$HOME/dotfiles/system/setup/bootstrap.zsh
 
