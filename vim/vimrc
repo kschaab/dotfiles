@@ -217,4 +217,7 @@ set autowrite
 " Automatically redistribute windows on resize
 autocmd VimResized * wincmd =
 
+" Relative line numbers
+ :set rnu
+
 :hi SpecialKey ctermfg=darkgray
