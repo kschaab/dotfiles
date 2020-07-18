@@ -1,3 +1,7 @@
+###############
+# Update repo #
+###############
+git --git-dir=$HOME/dotfiles/.git fetch --all > /dev/null && git --git-dir=$HOME/dotfiles/.git merge --ff-only > /dev/null || echo "$HOME/dotfiles is dirty and cannot be fast-forwarded."
 
 if [[ `uname` == 'Darwin' ]]; then
     source $(dirname "${(%):-%N}")/mac.zsh
