@@ -1,13 +1,13 @@
-" Welcome to Vim (http://go/vim).
-
 " Enable modern Vim features not compatible with Vi spec.
 set nocompatible
 
-" Default tabs
-set autoindent smarttab tabstop=2 shiftwidth=2 expandtab
+syntax on
 
 " Extend timeout for my slow brain to catch up
 set timeoutlen=3000
+
+" 
+set tabstop=2 expandtab shiftwidth=2 smarttab
 
 " Automatically change directory to the buffer's directory
 autocmd BufWinEnter * lcd %:p:h
@@ -41,7 +41,6 @@ filetype off
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'justinmk/vim-sneak'
@@ -49,14 +48,10 @@ Plugin 'dhruvasagar/vim-markify'
 Plugin 'mhinz/vim-signify'
 Plugin 'majutsushi/tagbar'
 Plugin 'wesQ3/vim-windowswap'
-Plugin 'honza/vim-snippets'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()
 filetype on
-
-let g:go_def_mode = 'guru'
-let g:go_info_mode = 'guru'
 
 """""""""""""
 "  Airline  "
@@ -115,17 +110,6 @@ let g:markify_info_text = '>>'
 "  Signify  "
 """""""""""""
 
-let g:signify_vcs_list = ['hg']
-
-"""""""""""""""""
-" youcompleteme "
-"""""""""""""""""
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
 """"""""""""""
 " easymotion "
 """"""""""""""
@@ -137,9 +121,8 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 " Always show statusline
 set laststatus=2
 
-" " Use 256 colours (Use this setting only if your terminal supports 256
-" colours)
-" set termguicolors
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set termguicolors
 
 set number
 set signcolumn=yes
@@ -149,8 +132,6 @@ set cursorline
 hi CursorLine term=bold cterm=bold
 hi CursorLineNr term=bold ctermfg=Yellow
 
-" Use outline
-" noremap <Leader>o :GoogleOutlineWindow<CR>
 
 set wildchar=<Tab> wildmenu wildmode=full
 set history=1000 undolevels=1000
@@ -163,20 +144,6 @@ nnoremap gQ :cp<CR>
 nnoremap <Leader>O :PiperSelectActiveFiles<CR>
 nnoremap <Leader>a :!hg amend && hg uc<cr>
 
-" Remap keys to move in insert mode
-inoremap <C-h> <C-o>h
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
-inoremap <C-l> <C-o>l
-inoremap <C-x> <C-o>x
-inoremap <C-a> <C-o>A
-inoremap <C-i> <C-o>I
-inoremap <C-w> <C-o>w
-inoremap <C-W> <C-o>W
-inoremap <C-e> <C-o>e
-inoremap <C-E> <C-o>E
-inoremap <C-b> <C-o>b
-inoremap <C-B> <C-o>B
 
 nnoremap <C-h> <C-w><h>
 nnoremap <C-j> <C-w><j>
@@ -195,13 +162,6 @@ set incsearch
 " Load all plugins before this line
 filetype plugin indent on
 
-" Turn on autosave
-"let g:auto_save = 1
-
-syntax on
-
-set list listchars=tab:»\ ,trail:°
-
 set background=dark
 colorscheme codedark
 
@@ -210,14 +170,11 @@ highlight link WintabsActive Visual
 " Don't extend comment lines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Fix tmux window on exit
-autocmd VimLeave * set notitle
-set autowrite
-
 " Automatically redistribute windows on resize
 autocmd VimResized * wincmd =
 
 " Relative line numbers
- :set rnu
+set rnu
 
-:hi SpecialKey ctermfg=darkgray
+" Support modeline
+set modelines=4

@@ -20,11 +20,10 @@ antigen bundle command-not-found
 antigen bundle autojump
 antigen bundle npm
 antigen bundle desyncr/auto-ls
-antigen bundle marlonrichert/zsh-autocomplete
 antigen bundle unixorn/autoupdate-antigen.zshplugin
-
-
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle hchbaw/auto-fu.zsh
 
 antigen theme romkatv/powerlevel10k
 
