@@ -1,3 +1,5 @@
+# vim: filetype=zsh:
+
 ###############
 # Update repo #
 ###############
@@ -9,23 +11,24 @@ if [[ -z "${DOTFILES_REPOSITORY_UPDATED}" ]]; then
   return 0
 fi
 
-zsh_dir=$(dirname "${(%):-%N}")/.zsh
+ZSH_SCRIPT_DIR=$(dirname "${(%):-%N}")/.zsh
+
+export PATH=$HOME/bin:$PATH
 
 ######################
 # OS dependent files #
 ######################
 if [[ `uname` == 'Darwin' ]]; then
-    source  "$zsh_dir/mac.zsh"
+    source  "$ZSH_SCRIPT_DIR/mac.zsh"
 fi
 
 if [[ `uname` == 'Linux' ]]; then
-    source "$zsh_dir/linux.zsh"
+    source "$ZSH_SCRIPT_DIR/linux.zsh"
 fi
 
 #################################
 # Powerlevel 10k instant prompt #
 #################################
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -46,16 +49,16 @@ setopt auto_pushd
 ###########
 # Antigen #
 ###########
-source "$zsh_dir/antigen.zsh"
+source "$ZSH_SCRIPT_DIR/antigen.zsh"
 
 ##############
 # Completion #
 ##############
-fpath=($zsh_dir/site-functions "${fpath[@]}")
+fpath=($ZSH_SCRIPT_DIR/site-functions "${fpath[@]}")
 autoload -Uz compinit && compinit
-autoload -U $zsh_dir/*(.:t)
+autoload -U $ZSH_SCRIPT_DIR/*(.:t)
 
-source "$zsh_dir/git.zsh"
+source "$ZSH_SCRIPT_DIR/git.zsh"
 
 # Set vim to the default editor
 export EDITOR=$(which vi)

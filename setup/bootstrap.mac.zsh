@@ -1,7 +1,11 @@
-#!/usr/bin/env zsh
+####################
+# Install Homebrew #
+####################
+if ! command -v $HOME/homebrew/bin/brew > /dev/null 2>&1 ;  then
+    git clone https://github.com/Homebrew/brew.git $HOME/homebrew
+fi
 
-##########################
-# Install brew utilities #
-##########################
-brew install autojump bat kubernetes-cli ranger fzf
+export PATH=$HOME/homebrew/bin:$PATH
+export LD_LIBRARY_PATH=$HOME/homebrew/lib:$LD_LIBRARY_PATH
 
+brew bundle install --no-lock --all --file "$(dirname "${(%):-%N}")"

@@ -15,17 +15,7 @@ if [[ ! -d $HOME/dotfiles/ ]]; then
   popd
 fi
 
-#############################################
-# create directory to backup existing files #
-#############################################
-if [[ ! -d $HOME/.bak/ ]]; then
-  mkdir $HOME/.bak
-fi
-
-##########################
-# bootstrap each dotfile #
-##########################
-$HOME/dotfiles/zsh/setup/bootstrap.zsh
-$HOME/dotfiles/vim/setup/bootstrap.zsh
-$HOME/dotfiles/system/setup/bootstrap.zsh
-
+#################
+# Run bootstrap #
+#################
+source "$HOME/dotfiles/setup/bootstrap.zsh"

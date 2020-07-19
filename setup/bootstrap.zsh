@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 
 ######################
 # OS dependent files #
@@ -10,3 +9,24 @@ fi
 if [[ `uname` == 'Linux' ]]; then
     eval $(dirname "${(%):-%N}")/bootstrap.linux.zsh
 fi
+
+if [[ ! -d "$HOME/bin" ]]; then
+    mkdir "$HOME/bin"
+fi
+
+###############################
+# Use stow to create symlinks #
+###############################
+stow -d $HOME/dotfiles zsh
+stow -d $HOME/dotfiles vim
+stow -d $HOME/dotfiles/bin -t $HOME/bin share
+
+#######################
+# Install vim plugins #
+#######################
+if [[ ! -d $HOME/.vim/bundle/Vundle.vim ]]; then
+  mkdir -p $HOME/.vim/bundle
+  git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+fi
+
+vim -c 'PluginInstall' -c 'qa!'
