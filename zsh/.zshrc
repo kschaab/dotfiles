@@ -11,7 +11,7 @@ if [[ -z "${DOTFILES_REPOSITORY_UPDATED}" ]]; then
   return 0
 fi
 
-ZSH_SCRIPT_DIR=$(dirname "${(%):-%N}")/.zsh
+ZSH_SCRIPT_DIR="${0:a:h}/.zsh"
 
 export PATH=$HOME/bin:$PATH
 

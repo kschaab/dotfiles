@@ -3,11 +3,11 @@
 # OS dependent files #
 ######################
 if [[ `uname` == 'Darwin' ]]; then
-    eval $(dirname "${(%):-%N}")/bootstrap.mac.zsh
+    source "${0:a:h}/bootstrap.mac.zsh"
 fi
 
 if [[ `uname` == 'Linux' ]]; then
-    eval $(dirname "${(%):-%N}")/bootstrap.linux.zsh
+    source "${0:a:h}/bootstrap.linux.zsh"
 fi
 
 if [[ ! -d "$HOME/bin" ]]; then

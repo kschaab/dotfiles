@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Ex: host=jayjin.mtv
+host="keithsc.sea.corp.google.com"
+ldap="keithsc"
+
+# list of mounting points "local_volumn_name1:remote/path/1:local/path/1 local_volumn_name2:remote/path/2:local/path/2"
+read -d '' mounts <<EOF
+mnt_users:/usr/local/google/users/$ldap:/usr/local/google/users/$ldap
+mnt_home:/usr/local/google/home/$ldap:/usr/local/google/home/$ldap
+EOF
+
+dokillall=1
+
+# First ensure the directories exist
+for mountpair in $mounts ; do
+  mountp=${mountpair/*:/}
+  if [ ! -d "$mountp" ] ; then
+    echo "$mountp does not exist, creating."
+    sudo mkdir -p -m 744 "$mountp"
+    sudo chown $USER:eng "$mountp"
+  fi
+done
+
+# Next unmount from before
+for mountpair in $mounts ; do
+  mountp=${mountpair/*:/}
+  if [[ $(mount | grep -F "$mountp" 2> /dev/null) ]] ; then
+    echo "$mountp was still mounted, unmounting."
+    umount $mountp || diskutil unmount force $mountp
+  fi
+done
+
+# Failsafe
+if [[ $dokillall ]]; then
+  killall -s sshfs > /dev/null 2>&1
+  nothingtokill=$?
+  if [[ $nothingtokill == 0 ]]; then
+    killall -9 sshfs
+  fi
+fi
+
+# Finally mount
+for mountpair in $mounts; do
+  vol=${mountpair/:*/}
+  pathpair=${mountpair/$vol:/}
+  remotep=${pathpair/:*/}
+  mountp=${pathpair/*:/}
+
+  mount-sshfs $vol $host $ldap $remotep $mountp
+
+  mountres=$?
+  if [[ $mountres != 0 ]]; then
+    echo "Failed to mount '$mountp', aborting"
+    echo "Check to see if '$mountp' exists on your workstation."
+    echo "If '$remotep' does not exist, remove '$mountpair' from the lists of mounts, "
+    echo "then try again."
+    echo "Also, make sure prodaccess was ran on your workstation."
+    exit $mountres
+  fi
+
+  echo "Mounted $mountp."
+done

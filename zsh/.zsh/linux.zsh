@@ -1,1 +1,1 @@
-export PATH=$HOME/bin/linux:$PATH
+export PATH=$HOME/bin/share/linux:$PATH

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+volname=$1
+host=$2
+user=$3
+pathremote=$4
+pathlocal=$5
+
+SSHFS_BIN="sshfs"
+SSH_OPTS="-oCheckHostIP=no -oStrictHostKeyChecking=no -oNumberOfPasswordPrompts=0 -oPasswordAuthentication=no"
+SSHFS_OPTS="-C -olocal -ofollow_symlinks -ovolname=$volname -oauto_cache -oiosize=65536 -oallow_recursion -oreconnect -oworkaround=rename"
+
+echo "Mounting with command: $SSHFS_BIN $user@$host:$pathremote $pathlocal -p22 $SSH_OPTS $SSHFS_OPTS"
+$SSHFS_BIN $user@$host:$pathremote $pathlocal -p22 $SSH_OPTS $SSHFS_OPTS

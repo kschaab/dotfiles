@@ -14,25 +14,13 @@ curl https://raw.githubusercontent.com/kschaab/dotfiles/master/bootstrap.zsh | z
 
 This will take care of cloning the repository as well as ensuring that bootstrap versions of the dotfiles are placed
 in the proper places (for example `~/.zshrc`, `~/.vimrc`, and `~/.config/i3/config`). This is accomplished by
-chaining calls to bootstrap scripts for each dotfile. For example [boostrap.zsh](bootstrap.zsh) calls
-[vim/setup/bootstrap.zsh](vim/setup/bootstrap.zsh) which in turn places ~/.vimrc and clones Vundle. The placed
-`.vimrc` simply sources `~/dotfiles/vim/vimrc`. This bootstrap is designed to be run once.
+using the GNU stow utility which will symlink the files from the local enlistment.
 
-> Note: All existing dotfiles present on the system will be moved to `~/.bak` upon bootstrap. This process is
-controlled by the corresponding `bootstrap.zsh` script, for example
-[vim/setup/bootstrap.zsh](vim/setup/bootstrap.zsh) backs up any existing `~/.vimrc`. These scripts rely on `~/.bak`
-being present. For that the creation of `~/.bak` directory is controlled by the root [bootstrap.zsh](bootstrap.zsh)
-file.
+## zsh
+zsh will be initialized with portable settings, for example POWERLEVEL prompt will be the same across all machines.
 
-## [zsh](zsh)
+## vim
+vim will also be initialized with portable settings.  Upon setup all vundle packages will be installed.
 
-I like `zsh` as it provides a bit more flexibility than bash whilst still being mostly compatible with bash. I use
-antigen as a bundle provider and Powerlevel 10k for prompt support. These take care of bootstrapping themselves on
-first execution so they will not be automatically bootstrapped during the main bootstrap phase. I try to keep things
-modular, for example Mac specific initialization is in [zsh/mac.zsh](zsh/mac.zsh).
-
-## [vim](vim)
-
-Vim is pretty simple, it uses Vundle for plugin management and [vim/setup/bootstrap.zsh](vim/setup/bootstrap.zsh)
-sets this up as well as running `:PluginInstall` to initialize vim so it is good to go. This requires vim to be
-present on the system.
+## ~/bin/share
+Shared scripts will live here. Each script any os dependent scripts will be installed in the os dependent location.
