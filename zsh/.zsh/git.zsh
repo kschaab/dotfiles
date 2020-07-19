@@ -41,6 +41,8 @@ function _g_process_dir()
   if [[ ! -d $1 ]]; then
     return
   fi
+  setopt localoptions NULL_GLOB
+
   for dir in $1/**/.git/; do
     local SOURCE_DIRECTORY=$(dirname $dir)
     local CURRENT_DIRECTORY=$SOURCE_DIRECTORY
