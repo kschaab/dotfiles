@@ -60,8 +60,12 @@ autoload -U $ZSH_SCRIPT_DIR/*(.:t)
 
 source "$ZSH_SCRIPT_DIR/git.zsh"
 
+eval $(thefuck --alias)
+
 # Set vim to the default editor
 export EDITOR=$(which vi)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f  "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
+
+eval $(thefuck --alias)
