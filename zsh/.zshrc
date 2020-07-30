@@ -15,6 +15,11 @@ ZSH_SCRIPT_DIR="${0:a:h}/.zsh"
 
 export PATH=$HOME/bin:$PATH
 
+#######################
+# Optional Components #
+#######################
+[[ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/bin/google-cloud-sdk/path.zsh.inc"
+
 ######################
 # OS dependent files #
 ######################
@@ -61,6 +66,8 @@ autoload -U $ZSH_SCRIPT_DIR/*(.:t)
 source "$ZSH_SCRIPT_DIR/git.zsh"
 
 eval $(thefuck --alias)
+
+[[ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]] && source "$HOME/bin/google-cloud-sdk/completion.zsh.inc"
 
 # Set vim to the default editor
 export EDITOR=$(which vi)
