@@ -2,11 +2,12 @@
 typeset -g ADOTDIR=$HOME/.antigen
 typeset -g ADOT=$ADOTDIR
 
-if [[ ! -d  $ADOTDIR ]]; then
-    mkdir $ADOTDIR
+if [[ -d  $ADOTDIR ]] && [[ ! -d $ADOTDIR/.git ]]; then
+    rm -rf $ADOTDIR
 fi
 
 if [[ ! -f $ADOTDIR/antigen.zsh ]]; then
+    git clone https://github.com/zsh-users/antigen.git $ADOTDIR
     curl -L git.io/antigen > $ADOTDIR/antigen.zsh
 fi
 

@@ -61,18 +61,22 @@ source "$ZSH_SCRIPT_DIR/antigen.zsh"
 ##############
 fpath=($ZSH_SCRIPT_DIR/site-functions "${fpath[@]}")
 autoload -Uz compinit && compinit
-autoload -U $ZSH_SCRIPT_DIR/*(.:t)
+autoload -U $fpath[1]/*(.:t)
 
 source "$ZSH_SCRIPT_DIR/git.zsh"
-
-eval $(thefuck --alias)
 
 [[ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]] && source "$HOME/bin/google-cloud-sdk/completion.zsh.inc"
 
 # Set vim to the default editor
 export EDITOR=$(which vi)
 
+###########
+# Aliases #
+###########
+eval $(thefuck --alias)
+alias ls=' ls -laG'
+alias cd=' cd'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f  "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
 
-eval $(thefuck --alias)
