@@ -15,11 +15,6 @@ ZSH_SCRIPT_DIR="${0:a:h}/.zsh"
 
 export PATH=$HOME/bin:$PATH
 
-#######################
-# Optional Components #
-#######################
-[[ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/bin/google-cloud-sdk/path.zsh.inc"
-
 ######################
 # OS dependent files #
 ######################
@@ -63,20 +58,33 @@ fpath=($ZSH_SCRIPT_DIR/site-functions "${fpath[@]}")
 autoload -Uz compinit && compinit
 autoload -U $fpath[1]/*(.:t)
 
-source "$ZSH_SCRIPT_DIR/git.zsh"
+##############
+# gcloud sdk #
+##############
+[[ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/google-cloud-sdk/path.zsh.inc"
+[[ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]] && source "$HOME/google-cloud-sdk/completion.zsh.inc"
 
-[[ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]] && source "$HOME/bin/google-cloud-sdk/completion.zsh.inc"
-
-# Set vim to the default editor
-export EDITOR=$(which vi)
+###########
+# kubectl #
+###########
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 ###########
 # Aliases #
 ###########
-eval $(thefuck --alias)
+alias tree="tree -aFC -I .git"
+[[ $commands[thefuck] ]] && eval $(thefuck --alias)
 alias ls=' ls -laG'
 alias cd=' cd'
 
+###############
+# local zshrc #
+###############
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+##############################################################
+# Powerlevel 10k - keep at (or close to) the end of the file #
+##############################################################
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f  "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
 
