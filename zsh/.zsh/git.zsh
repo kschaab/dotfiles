@@ -12,6 +12,16 @@ function _git_prune_merged()
 
 alias git-prune-merged='_git_prune_merged'
 
+#####################
+# git switch branch #
+#####################
+function _git_switch_branch
+{
+  git switch "$(git branch --sort=-committerdate | fzf --no-sort | tr -d '[:space:'] | tr -d '*')"
+}
+
+alias gs='_git_switch_branch'
+
 ################
 # g completion #
 ################
