@@ -15,11 +15,6 @@ ZSH_SCRIPT_DIR="${0:a:h}/.zsh"
 
 export PATH=$HOME/bin:$PATH
 
-#######################
-# Optional Components #
-#######################
-[[ -f "$HOME/bin/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/bin/google-cloud-sdk/path.zsh.inc"
-
 ######################
 # OS dependent files #
 ######################
@@ -30,6 +25,13 @@ fi
 if [[ `uname` == 'Linux' ]]; then
     source "$ZSH_SCRIPT_DIR/linux.zsh"
 fi
+
+#######################
+# Optional Components #
+#######################
+GCLOUD_SDK_DIR=$(dirname $(dirname $(which gcloud)))
+
+[[ -f "$GCLOUD_SDK_DIR/path.zsh.inc" ]] && source "$GCLOUD_SDK_DIR/path.zsh.inc"
 
 #################################
 # Powerlevel 10k instant prompt #
@@ -65,7 +67,7 @@ autoload -U $fpath[1]/*(.:t)
 
 source "$ZSH_SCRIPT_DIR/git.zsh"
 
-[[ -f "$HOME/bin/google-cloud-sdk/completion.zsh.inc" ]] && source "$HOME/bin/google-cloud-sdk/completion.zsh.inc"
+[[ -f "$GCLOUD_SDK_DIR/completion.zsh.inc" ]] && source "$GCLOUD_SDK_DIR/completion.zsh.inc"
 
 # Set vim to the default editor
 export EDITOR=$(which vi)
