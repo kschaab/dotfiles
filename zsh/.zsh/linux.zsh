@@ -1,6 +1,10 @@
 export PATH=$HOME/bin/share/linux:$PATH
 
-if [[ -d $HOME/google-cloud-sdk/bin ]]; then
- export PATH=$PATH:$HOME/google-cloud-sdk/bin
-fi 
+####################
+# Google Cloud SDK #
+####################
+GCLOUD_SDK_DIR=$HOME/google-cloud-sdk/bin 
+if [[ -d $GCLOUD_SDK_DIR ]; then
+  [[ -f "$GCLOUD_SDK_DIR/path.zsh.inc" ]] && source "$GCLOUD_SDK_DIR/path.zsh.inc"
+fi
 

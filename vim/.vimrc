@@ -62,6 +62,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#fnamecollapse=0
 let g:airline#extensions#tabline#fnametruncate=0
+let g:airline_theme = 'codedark'
 
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2

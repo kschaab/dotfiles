@@ -1,3 +1,5 @@
+xcode-select --install
+
 ####################
 # Install Homebrew #
 ####################

@@ -26,13 +26,6 @@ if [[ `uname` == 'Linux' ]]; then
     source "$ZSH_SCRIPT_DIR/linux.zsh"
 fi
 
-#######################
-# Optional Components #
-#######################
-GCLOUD_SDK_DIR=$(dirname $(dirname $(which gcloud)))
-
-[[ -f "$GCLOUD_SDK_DIR/path.zsh.inc" ]] && source "$GCLOUD_SDK_DIR/path.zsh.inc"
-
 #################################
 # Powerlevel 10k instant prompt #
 #################################

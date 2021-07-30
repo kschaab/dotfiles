@@ -3,12 +3,19 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 
+brew "git"
+
 cask_args appdir: "~/Applications"
 
 cask "google-chrome"
 cask "alfred"
 cask "visual-studio-code"
-cask "font-meslolg-nerd-font"
+
+cask "google-cloud-sdk"
+
+cask "font-meslo-lg-nerd-font"
+cask "font-droid-sans-mono-nerd-font"
+cask "font-inconsolata-go-nerd-font"
 
 brew "autojump"
 brew "bat"
@@ -19,3 +26,4 @@ brew "ranger"
 brew "stow"
 brew "thefuck"
 brew "tree"
+brew "pyenv"

@@ -14,6 +14,8 @@ if [[ ! -d "$HOME/bin" ]]; then
     mkdir "$HOME/bin"
 fi
 
+echo 'Reflecting zsh and vim files'
+
 ###############################
 # Use stow to create symlinks #
 ###############################
