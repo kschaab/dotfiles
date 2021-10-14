@@ -72,6 +72,33 @@ eval $(thefuck --alias)
 alias ls=' ls -laG'
 alias cd=' cd'
 
+unset LESS;
+
+########
+# dirs #
+########
+DIRSTACKSIZE=9
+setopt autopushd pushdminus pushdsilent pushdtohome pushd_ignore_dups
+alias dh='dirs -v'
+alias cd=' cd'
+
+DIRSTACKFILE=~/.zdirs
+if [[ -f $DIRSTACKFILE ]] && [[ $dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+fi
+
+alias ..=" cd .."
+alias ..2=" cd ../.."
+alias ..3=" cd ../../.."
+alias ..4=" cd ../../../.."
+alias ..5=" cd ../../../../.."
+
+function _mkdir_cd() {
+  mkdir -p -- $1 && cd -P -- $1
+}
+alias mcd=" _mkdir_cd"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f  "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
 
