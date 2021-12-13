@@ -12,3 +12,7 @@ if [[ -f /etc/bash_completion.d/hgd ]]; then
   source /etc/bash_completion.d/hgd
 fi
 
+if [[ -f /etc/bash.bashrc.d/shell_history_forwarder.sh ]]; then
+  source /etc/bash.bashrc.d/shell_history_forwarder.sh
+fi
+
