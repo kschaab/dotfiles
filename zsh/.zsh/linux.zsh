@@ -18,6 +18,15 @@ if [[ -f /etc/bash.bashrc.d/shell_history_forwarder.sh ]]; then
   source /etc/bash.bashrc.d/shell_history_forwarder.sh
 fi
 
+if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+fi
+
+
+if [[ -f /usr/share/doc/fzf/examples/completion.bash ]]; then
+  source /usr/share/doc/fzf/examples/completion.bash
+fi
+
 ####################
 # Google functions #
 ####################
