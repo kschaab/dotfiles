@@ -23,8 +23,8 @@ if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
 fi
 
 
-if [[ -f /usr/share/doc/fzf/examples/completion.bash ]]; then
-  source /usr/share/doc/fzf/examples/completion.bash
+if [[ -f /usr/share/doc/fzf/examples/completion.zsh ]]; then
+  source /usr/share/doc/fzf/examples/completion.zsh
 fi
 
 ####################
