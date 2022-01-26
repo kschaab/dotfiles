@@ -2,7 +2,7 @@
 
 function rcd {
   tempfile="$(mktemp -t tmp.XXXXXX)"
-  ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+  ranger --show-only-dirs --choosedir="$tempfile" "${@:-$(pwd)}"
   test -f "$tempfile" &&
   if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
     cd -- "$(cat "$tempfile")"
