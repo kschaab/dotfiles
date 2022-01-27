@@ -33,3 +33,10 @@ fi
 if [[ "$SCRIPT_DIR" == *"/google/"* ]]; then
   source $SCRIPT_DIR/google.zsh
 fi
+
+##########
+# batcat #
+##########
+if type batcat > /dev/null && ! type bat > /dev/null; then
+  alias bat=batcat
+fi
