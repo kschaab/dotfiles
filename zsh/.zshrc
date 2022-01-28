@@ -10,7 +10,6 @@ if [[ -n "$DOTFILES_CHANGES" ]]; then
   echo "$DOTFILES_CHANGES"
 fi
   
-
 ZSH_SCRIPT_DIR="${0:a:h}/.zsh"
 export PATH=$HOME/bin:$PATH
 
