@@ -135,12 +135,12 @@ function _g_completion()
   _describe 'g' candidates
 }
 
-for p in $PREFERENCES; do
-  _g_process_dir $p
-done
+#for p in $PREFERENCES; do
+#  _g_process_dir $p
+#done
 
-for s in $SOURCE_DIRS; do
-  _g_process_dir $s
-done
+#for s in $SOURCE_DIRS; do
+#  _g_process_dir $s
+#done
 
-compdef _g_completion _g_dir
+#compdef _g_completion _g_dir

@@ -1,19 +1,23 @@
 # vim: filetype=zsh:
 
-###############
-# Update repo #
-###############
-if [[ -z "${DOTFILES_REPOSITORY_UPDATED}" ]]; then 
-  # Update the repository then re-source the file to pick up the changes
-  git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles fetch --all > /dev/null && git --git-dir=$HOME/dotfiles/.git merge --work-tree=$HOME/dotfiles --ff-only > /dev/null || echo "$HOME/dotfiles is dirty and cannot be fast-forwarded."
-  DOTFILES_REPOSITORY_UPDATED=true
-  source  "${(%):-%N}"
-  return 0
-fi
+############################
+# Show updates to dotfiles #
+############################
+git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles remote update &>/dev/null
+git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles status -u -s
 
 ZSH_SCRIPT_DIR="${0:a:h}/.zsh"
-
 export PATH=$HOME/bin:$PATH
+
+#################################
+# Powerlevel 10k instant prompt #
+#################################
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 ######################
 # OS dependent files #
@@ -24,16 +28,6 @@ fi
 
 if [[ `uname` == 'Linux' ]]; then
     source "$ZSH_SCRIPT_DIR/linux.zsh"
-fi
-
-#################################
-# Powerlevel 10k instant prompt #
-#################################
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 ###########
