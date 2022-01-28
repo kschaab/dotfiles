@@ -25,8 +25,12 @@ antigen bundle unixorn/autoupdate-antigen.zshplugin
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle hchbaw/auto-fu.zsh
+antigen bundle Vifon/deer
 
 antigen theme romkatv/powerlevel10k
 
 antigen apply
+autoload -U deer
+zle -N deer
+bindkey '\ek' deer
 
