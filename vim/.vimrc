@@ -129,9 +129,8 @@ set signcolumn=yes
 
 " Highlight current line
 set cursorline
-hi CursorLine term=bold cterm=bold
+hi CursorLine term=underline cterm=underline
 hi CursorLineNr term=bold ctermfg=Yellow
-
 
 set wildchar=<Tab> wildmenu wildmode=full
 set history=1000 undolevels=1000
