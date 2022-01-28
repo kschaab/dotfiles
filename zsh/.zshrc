@@ -5,7 +5,7 @@
 ###############
 if [[ -z "${DOTFILES_REPOSITORY_UPDATED}" ]]; then 
   # Update the repository then re-source the file to pick up the changes
-  git --git-dir=$HOME/dotfiles/.git fetch --all > /dev/null && git --git-dir=$HOME/dotfiles/.git merge --ff-only > /dev/null || echo "$HOME/dotfiles is dirty and cannot be fast-forwarded."
+  git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles fetch --all > /dev/null && git --git-dir=$HOME/dotfiles/.git merge --work-tree=$HOME/dotfiles --ff-only > /dev/null || echo "$HOME/dotfiles is dirty and cannot be fast-forwarded."
   DOTFILES_REPOSITORY_UPDATED=true
   source  "${(%):-%N}"
   return 0

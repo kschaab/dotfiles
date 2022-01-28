@@ -9,3 +9,12 @@ function __blazebin_or_back() {
 }
 
 alias bb=" __blazebin_or_back"
+
+
+###############
+# g4d support #
+###############
+if [[ -f "/etc/bash_completion.d/g4d" ]]; then
+  source /etc/bash_completion.d/g4d
+fi
+
