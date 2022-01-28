@@ -6,7 +6,7 @@ repository to ~/dotfiles and that hosts all the dotfiles. Setup is contained in 
 Initialization is possible by running the [bootstrap.zsh](bootstrap.zsh) script in the root of the repository. This
 can be done simply by having `git` and `zsh` on the system and running the command below. The scripts require no
 other utilities, for example on Mac the bootstrap script will set up sudoless homebrew, install nerd fonts, etc.
-On Linux this runs the overall package manager to manage packages and will require sudo.
+On Linux this runs the overall package manager to manage packages and **will require sudo**.
 
 ```
 curl https://raw.githubusercontent.com/kschaab/dotfiles/master/bootstrap.zsh | zsh
