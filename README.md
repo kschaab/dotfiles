@@ -24,3 +24,4 @@ vim will also be initialized with portable settings.  Upon setup all vundle pack
 
 ## ~/bin/share
 Shared scripts will live here. Each script any os dependent scripts will be installed in the os dependent location.
+
