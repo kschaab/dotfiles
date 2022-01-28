@@ -10,3 +10,18 @@ if [[ -d $GCLOUD_SDK_DIR ]]; then
   [[ -f "$GCLOUD_SDK_DIR/path.zsh.inc" ]] && source "$GCLOUD_SDK_DIR/path.zsh.inc"
 fi
 
+CC_GCLOUD=$HOME/Library/Application\ Support/cloud-code/installer/google-cloud-sdk/bin
+if [[ -d "$CC_GCLOUD" ]]; then
+  export CC_GCLOUD
+fi
+
+#################
+# Morning gcert #
+#################
+function gc() {
+  if [[ -z "$1" ]]; then
+    echo "Must specify host to use when running gc" 1>&2
+    return 1
+  fi
+  gcert && ssh $1 -t 'echo "Running gcert on $HOST" && gcert'
+}
