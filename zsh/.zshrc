@@ -13,6 +13,10 @@ fi
 ZSH_SCRIPT_DIR="$HOME/.zsh"
 export PATH=$HOME/bin:$PATH
 
+if [[ -d "$HOME/.npm-global/bin" ]]; then
+  PATH=$PATH:$HOME/.npm-global/bin
+fi
+
 #################################
 # Powerlevel 10k instant prompt #
 #################################
