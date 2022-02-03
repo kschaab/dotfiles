@@ -24,8 +24,8 @@ antigen bundle desyncr/auto-ls
 antigen bundle unixorn/autoupdate-antigen.zshplugin
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle hchbaw/auto-fu.zsh
 antigen bundle Vifon/deer
+antigen bundle tymm/zsh-directory-history
 
 antigen theme romkatv/powerlevel10k
 
