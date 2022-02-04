@@ -23,5 +23,6 @@ function gc() {
     echo "Must specify host to use when running gc" 1>&2
     return 1
   fi
-  gcert && ssh $1 -t 'echo "Running gcert on $HOST" && gcert'
+
+  for i in {1..3}; do gcert && break || echo "Retrying..."; done && ssh $1 -t 'echo "Running gcert on $HOST" && for i in {1..3}; do gcert && break || echo "Retrying..."; done'
 }
