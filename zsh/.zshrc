@@ -4,6 +4,7 @@
 # Show updates to dotfiles #
 ############################
 git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles remote update &>/dev/null
+LOCAL_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles status -u -s )"
 DOTFILES_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles diff origin/master --name-status )" 
 if [[ -n "$DOTFILES_CHANGES" ]]; then
   echo "Dotfiles have changed:"
