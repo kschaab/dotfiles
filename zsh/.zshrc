@@ -4,12 +4,12 @@
 # Show updates to dotfiles #
 ############################
 git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles remote update &>/dev/null
-DOTFILES_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles diff origin/master --name-status )" 
+DOTFILES_ALL_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles diff origin/master --name-status )"
 if [[ -n "$DOTFILES_CHANGES" ]]; then
   echo "Dotfiles have changed:"
   echo "$DOTFILES_CHANGES"
 fi
-  
+
 ZSH_SCRIPT_DIR="$HOME/.zsh"
 export PATH=$HOME/bin:$PATH
 
