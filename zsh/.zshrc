@@ -5,17 +5,17 @@
 ############################
 git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles remote update &>/dev/null
 DOTFILES_BRANCH="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles rev-parse --abbrev-ref HEAD )"
-DOTFILES_ALL_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles diff master origin/master --name-status )"
-DOTFILES_LOCAL_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles status -u -s )"
+DOTFILES_ALL_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles diff origin/master --name-status | sed 's/\t/ /g' )"
+DOTFILES_LOCAL_CHANGES="$( git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles status -u -s | sed 's/^ //g' )"
 if [[ -n "$DOTFILES_ALL_CHANGES" && -z "$DOTFILES_LOCAL_CHANGES" && "$DOTFILES_BRANCH" == "master" ]]; then
   echo "Synching dotfiles with latest changes"
   git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles pull --ff-only
-elif [[ "$DOTFILES_LOCAL_CHANGES" == "$DOTFILES_ALL_CHANGES" ]]; then
+elif [[ -n "$DOTFILES_LOCAL_CHANGES" && "$DOTFILES_LOCAL_CHANGES" == "$DOTFILES_ALL_CHANGES" ]]; then
   echo "Dotfiles have changed locally only:"
   echo "$DOTFILES_ALL_CHANGES"
 elif [[ "$DOTFILES_BRANCH" != "master" ]]; then
   echo "Dotfiles not on master!"
-else
+elif [[ -n "$DOTFILES_LOCAL_CHANGES" ]]; then
   echo "Dotfiles have changed remotely and locally:"
   echo "$DOTFILES_ALL_CHANGES"
 fi
