@@ -20,9 +20,16 @@ elif [[ -n "$DOTFILES_LOCAL_CHANGES" ]]; then
   echo "$DOTFILES_ALL_CHANGES"
 fi
 
+########
+# Init #
+########
+
 ZSH_SCRIPT_DIR="$HOME/.zsh"
 export PATH=$HOME/bin:$PATH
 
+######################################
+# Local path for npm global installs #
+######################################
 if [[ -d "$HOME/.npm-global/bin" ]]; then
   PATH=$PATH:$HOME/.npm-global/bin
 fi
