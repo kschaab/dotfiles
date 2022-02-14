@@ -23,9 +23,34 @@ fi
 ########
 # Init #
 ########
-
 ZSH_SCRIPT_DIR="$HOME/.zsh"
 export PATH=$HOME/bin:$PATH
+
+###########
+# history #
+###########
+HISTFILE=$HOME/.cache/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt inc_append_history share_history hist_ignore_space
+
+setopt auto_pushd
+
+######################
+# OS dependent files #
+######################
+if [[ `uname` == 'Darwin' ]]; then
+    source  "$ZSH_SCRIPT_DIR/mac.zsh"
+fi
+
+if [[ `uname` == 'Linux' ]]; then
+    source "$ZSH_SCRIPT_DIR/linux.zsh"
+fi
+
+###########
+# Antigen #
+###########
+source "$ZSH_SCRIPT_DIR/antigen.zsh"
 
 ######################################
 # Local path for npm global installs #
@@ -43,32 +68,6 @@ fi
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-######################
-# OS dependent files #
-######################
-if [[ `uname` == 'Darwin' ]]; then
-    source  "$ZSH_SCRIPT_DIR/mac.zsh"
-fi
-
-if [[ `uname` == 'Linux' ]]; then
-    source "$ZSH_SCRIPT_DIR/linux.zsh"
-fi
-
-###########
-# history #
-###########
-HISTFILE=$HOME/.cache/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt inc_append_history share_history hist_ignore_space
-
-setopt auto_pushd
-
-###########
-# Antigen #
-###########
-source "$ZSH_SCRIPT_DIR/antigen.zsh"
 
 ##############
 # Completion #
