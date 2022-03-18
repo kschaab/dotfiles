@@ -1,6 +1,9 @@
 SCRIPT_DIR=${0:a:h}
 
 export PATH=$HOME/bin/share/linux:$PATH
+if [[ -d $HOME/.local/bin ]]; then
+  export PATH=$HOME/.local/bin:$PATH
+fi
 
 ####################
 # Google Cloud SDK #
