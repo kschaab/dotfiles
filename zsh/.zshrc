@@ -125,3 +125,7 @@ alias mcd=" _mkdir_cd"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f  "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
 
+
+# tabtab source for yarn package
+# uninstall by removing these lines or running `tabtab uninstall yarn`
+[[ -f $HOME/.npm-global/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . $HOME/.npm-global/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
