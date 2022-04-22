@@ -199,3 +199,6 @@ set rnu
 
 " Support modeline
 set modelines=4
+
+let &t_SI = "\<Esc>]50;CursorShape=2;BlinkingCursorEnabled=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0;BlinkingCursorEnabled=0\x7"
