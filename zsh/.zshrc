@@ -31,10 +31,15 @@ export PATH=$HOME/bin:$PATH
 ###########
 HISTFILE=$HOME/.cache/.zsh_history
 HISTSIZE=10000
-SAVEHIST=10000
+SAVEHIST=$HISTSIZE
 setopt inc_append_history share_history hist_ignore_space
 
 setopt auto_pushd
+
+###########
+# Antigen #
+###########
+source "$ZSH_SCRIPT_DIR/antigen.zsh"
 
 ######################
 # OS dependent files #
@@ -46,11 +51,6 @@ fi
 if [[ `uname` == 'Linux' ]]; then
     source "$ZSH_SCRIPT_DIR/linux.zsh"
 fi
-
-###########
-# Antigen #
-###########
-source "$ZSH_SCRIPT_DIR/antigen.zsh"
 
 ######################################
 # Local path for npm global installs #
@@ -87,6 +87,16 @@ source "$ZSH_SCRIPT_DIR/git.zsh"
 
 # Set vim to the default editor
 export EDITOR=$(which vi)
+
+###############
+# Keybindings #
+###############
+#to know the key binding for a key, run `od -c` and press the key
+bindkey '^[[3~' delete-char           #enables DEL key proper behaviour
+bindkey '^[[1;5C' forward-word        #[Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word       #[Ctrl-LeftArrow] - move backward one word
+bindkey  "^[[H"   beginning-of-line   #[Home] - goes at the begining of the line
+bindkey  "^[[F"   end-of-line         #[End] - goes at the end of the line
 
 ###########
 # Aliases #

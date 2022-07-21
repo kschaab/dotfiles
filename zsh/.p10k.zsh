@@ -35,6 +35,7 @@
     os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
+    goog_fig
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
