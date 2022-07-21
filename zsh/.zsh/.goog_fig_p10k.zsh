@@ -207,3 +207,4 @@ prompt_goog_fig() {
   p10k segment -e -t $content
   GOOG_FIG_PROMPT_OUTPUT=()
 }
+
