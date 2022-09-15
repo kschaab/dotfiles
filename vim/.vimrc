@@ -52,7 +52,6 @@ Plugin 'wesQ3/vim-windowswap'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'RRethy/vim-illuminate'
-Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()
 filetype on
