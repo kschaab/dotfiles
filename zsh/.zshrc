@@ -26,6 +26,11 @@ fi
 ZSH_SCRIPT_DIR="$HOME/.zsh"
 export PATH=$HOME/bin:$PATH
 
+if [[ -d $HOME/homebrew/bin ]]; then
+  export PATH=$HOME/homebrew/bin:$HOME/bin/share/darwin:$PATH
+  export LD_LIBRARY_PATH=$HOME/homebrew/lib:$LD_LIBRARY_PATH
+fi
+
 ###########
 # history #
 ###########
