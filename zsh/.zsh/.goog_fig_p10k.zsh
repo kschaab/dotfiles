@@ -196,13 +196,23 @@ function _goog_fig_callback() {
   fi
 }
 
-async_init
-async_start_worker goog_fig_worker -n
-async_register_callback goog_fig_worker _goog_fig_callback
+function _start_worker() {
+  async_init
+  async_start_worker goog_fig_worker -n
+  async_register_callback goog_fig_worker _goog_fig_callback
+}
+
+_start_worker
+
 typeset -g -A GOOG_FIG_PROMPT_OUTPUT
 
 prompt_goog_fig() {
   async_job goog_fig_worker _goog_fig_async $PWD
+  local result=$?
+  if [[ "$result" != "0" ]]; then
+    _start_worker
+    async_job goog_fig_worker _goog_fig_async $PWD
+  fi
   local content='$GOOG_FIG_PROMPT_OUTPUT[$PWD]'
   p10k segment -e -t $content
   GOOG_FIG_PROMPT_OUTPUT=()

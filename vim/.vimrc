@@ -39,6 +39,7 @@ set maxmempattern=3000
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 filetype off
 call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomasiser/vim-code-dark'
@@ -46,9 +47,12 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'justinmk/vim-sneak'
 Plugin 'mhinz/vim-signify'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 Plugin 'wesQ3/vim-windowswap'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'RRethy/vim-illuminate'
+
 call vundle#end()
 filetype on
 
@@ -199,6 +203,12 @@ set rnu
 
 " Support modeline
 set modelines=4
+
+augroup illuminate_augroup
+  autocmd!
+  autocmd VimEnter * hi illuminatedWord guibg=#3A3F49
+  autocmd VimEnter * hi illuminatedCurWord guibg=#3A3F49 cterm=underline gui=underline
+augroup END
 
 let &t_SI = "\<Esc>]50;CursorShape=2;BlinkingCursorEnabled=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0;BlinkingCursorEnabled=0\x7"
