@@ -27,6 +27,7 @@ antigen bundle Vifon/deer
 antigen bundle mafredri/zsh-async 
 antigen bundle aubreypwd/zsh-plugin-fd@1.0.0
 antigen bundle Aloxaf/fzf-tab
+antigen bundle g-plane/zsh-yarn-autocompletions
 
 antigen theme romkatv/powerlevel10k
 
