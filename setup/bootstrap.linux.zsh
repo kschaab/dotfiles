@@ -3,7 +3,7 @@
 # Install linux utilities #
 ###########################
 sudo apt update
-sudo apt install autojump bat ranger fzf thefuck stow
+sudo apt -y install autojump bat ranger fzf thefuck stow
 
 ##############
 # Nerd fonts #
