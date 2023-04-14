@@ -126,6 +126,9 @@ if [[ -f $DIRSTACKFILE ]] && [[ $dirstack -eq 0 ]]; then
   [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
 fi
 
+unalias "..."
+unalias "...."
+unalias "....."
 alias ..=" cd .."
 alias ..2=" cd ../.."
 alias ..3=" cd ../../.."
