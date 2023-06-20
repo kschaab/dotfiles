@@ -83,12 +83,20 @@ autoload -U $fpath[1]/*(.:t)
 
 source "$ZSH_SCRIPT_DIR/git.zsh"
 
+for i in cdb fastboot g4d git-prompt hgd mosh npm rapture ; do
+  i=/etc/bash_completion.d/$i
+  [[ -f $i && -r $i ]] && source "$i"
+done
+
 # gcloud compleition
 [[ -f "$GCLOUD_SDK_DIR/completion.zsh.inc" ]] && source "$GCLOUD_SDK_DIR/completion.zsh.inc"
 
 # fzf completion
 [[ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]] && source "/usr/share/doc/fzf/examples/key-bindings.zsh"
 [[ -f "/usr/share/doc/fzf/examples/completion.zsh" ]] && source "/usr/share/doc/fzf/examples/completion.zsh"
+
+# fasd hook
+eval "$(fasd --init posix-alias zsh-hook)"
 
 # Set vim to the default editor
 export EDITOR=$(which vi)
