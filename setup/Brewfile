@@ -9,9 +9,6 @@ cask_args appdir: "~/Applications"
 
 cask "google-chrome"
 cask "alfred"
-cask "visual-studio-code"
-
-cask "google-cloud-sdk"
 
 cask "font-meslo-lg-nerd-font"
 cask "font-droid-sans-mono-nerd-font"
