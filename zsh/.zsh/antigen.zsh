@@ -33,5 +33,5 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 autoload -U deer
 zle -N deer
-bindkey '\ek' deer
+bindkey '^t' deer
 

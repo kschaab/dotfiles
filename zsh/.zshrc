@@ -46,6 +46,11 @@ setopt auto_pushd
 ###########
 source "$ZSH_SCRIPT_DIR/antigen.zsh"
 
+########
+# tmux #
+########
+work() { tmx2 new-session -A -s ${1:-work}; }
+
 ######################
 # OS dependent files #
 ######################
@@ -155,3 +160,7 @@ alias mcd=" _mkdir_cd"
 # tabtab source for yarn package
 # uninstall by removing these lines or running `tabtab uninstall yarn`
 [[ -f $HOME/.npm-global/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . $HOME/.npm-global/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
