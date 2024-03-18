@@ -9,6 +9,7 @@ function __blazebin_or_back() {
 }
 
 alias bb=" __blazebin_or_back"
+alias tm="/google/data/ro/teams/tenantmanager/tools/tm"
 
 
 ###############
