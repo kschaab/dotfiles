@@ -10,6 +10,7 @@ function __blazebin_or_back() {
 
 alias bb=" __blazebin_or_back"
 alias tm="/google/data/ro/teams/tenantmanager/tools/tm"
+alias project_id_translator="/google/bin/releases/oneplatform/chemist/project_id_number_translator"
 
 
 ###############
