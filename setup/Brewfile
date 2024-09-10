@@ -2,7 +2,6 @@ tap "homebrew/bundle"
 
 cask_args appdir: "~/Applications"
 
-cask "google-chrome"
 cask "alfred"
 
 cask "font-meslo-lg-nerd-font"
