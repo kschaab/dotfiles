@@ -24,9 +24,17 @@ fi
 # Fig prompt #
 ##############
 
+#################
+# go/hi support #
+#################
+if [[ -f "/etc/bash.bashrc.d/shell_history_forwarder.sh" ]]; then
+  source /etc/bash.bashrc.d/shell_history_forwarder.sh
+else
+  echo "hi not installed - go/hi"
+fi
+
 # NOTE: This requires fig_prompt and fig_status.py which can be found at
 # 
-
 if [[ -f "$HOME/fig_status.py" ]]; then
   #Enable Fig prompt information
   source ~/.zsh/.goog_fig_p10k.zsh
