@@ -1,13 +1,7 @@
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/core"
-
-brew "git"
 
 cask_args appdir: "~/Applications"
 
-cask "google-chrome"
 cask "alfred"
 
 cask "font-meslo-lg-nerd-font"
@@ -17,8 +11,6 @@ cask "font-inconsolata-go-nerd-font"
 brew "autojump"
 brew "bat"
 brew "fzf"
-brew "kubernetes-cli"
-brew "lastpass-cli"
 brew "ranger"
 brew "stow"
 brew "thefuck"
