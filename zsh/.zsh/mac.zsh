@@ -14,14 +14,9 @@ if [[ -d "$CC_GCLOUD" ]]; then
   export CC_GCLOUD
 fi
 
-#################
-# Morning gcert #
-#################
-function gc() {
-  if [[ -z "$1" ]]; then
-    echo "Must specify host to use when running gc" 1>&2
-    return 1
-  fi
-
-  for i in {1..3}; do gcert && break || echo "Retrying..."; done && ssh $1 -t 'echo "Running gcert on $HOST" && for i in {1..3}; do gcert && break || echo "Retrying..."; done'
+###############################################
+# Connect to cloudtop (keithsc.c.googlers.com #
+###############################################
+function ct() {
+  rw -r --tmux_iterm -t --tmux_session work keithsc.c.googlers.com
 }
